@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
 import 'package:smart_neighbourhood/Controllers/Auth_controller.dart';
+import 'package:smart_neighbourhood/View/Home.dart';
+import 'package:smart_neighbourhood/View/Main_page.dart';
 import 'package:smart_neighbourhood/View/Signup_screen.dart';
 import 'package:smart_neighbourhood/res/Components/Custom_cliper.dart';
 import 'package:smart_neighbourhood/res/Components/MyAuth_button.dart';
@@ -49,14 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 220,
                     width: width,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Appcolors.primaryColor,
-                          Appcolors.secondaryColor
-                        ],
-                        begin: Alignment.topLeft,
-                        end: Alignment.topRight,
-                      ),
+                      color: Appcolors.primaryColor,
                       boxShadow: [
                         BoxShadow(
                           color: Appcolors.primaryColor
@@ -78,14 +73,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   height: 180,
                   width: 310,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Appcolors.primaryColor,
-                        Appcolors.secondaryColor
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.topRight,
-                    ),
+                    color: Appcolors.primaryColor,
                     borderRadius: BorderRadius.circular(200),
                     boxShadow: [
                       BoxShadow(
@@ -222,7 +210,36 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: MyButton(
-                        onTap: () {},
+                        onTap: () async {
+                          // Navigator.pushAndRemoveUntil(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => Mainpage()),
+                          //   (route) => false,
+                          // );
+                          await Future.delayed(Duration(milliseconds: 50));
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (_, animation, __) => Mainpage(),
+                                transitionDuration: Duration(milliseconds: 300),
+                                transitionsBuilder: (context, animation,
+                                    secondaryAnimation, child) {
+                                  return FadeTransition(
+                                    opacity: animation,
+                                    child: SlideTransition(
+                                      position: Tween<Offset>(
+                                              begin: Offset(0, 0.1),
+                                              end: Offset.zero)
+                                          .animate(CurvedAnimation(
+                                              parent: animation,
+                                              curve: Curves.bounceInOut)),
+                                      child: child,
+                                    ),
+                                  );
+                                },
+                              ),
+                              (route) => false);
+                        },
                         text: "LOG IN",
                         isloading: authcontroller.isloading.value,
                       ),

@@ -43,6 +43,13 @@ dependencies:
   get: ^4.7.2
   
   another_flushbar: ^1.12.32
+  curved_navigation_bar: ^1.0.6
+  flutter_svg: ^2.2.0
+  google_maps_flutter: ^2.12.3
+  geolocator: ^13.0.2
+ 
+  geocoding: ^4.0.0
+  shared_preferences: ^2.5.3
   
 
 dev_dependencies:

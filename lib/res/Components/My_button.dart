@@ -8,8 +8,12 @@ class MyButton extends StatelessWidget {
   final void Function()? onTap;
   final String text;
   final bool isloading;
+  final Color? bgcolor;
+  final double? radius;
   const MyButton(
       {super.key,
+      this.radius,
+      this.bgcolor,
       required this.onTap,
       required this.text,
       this.isloading = false});
@@ -21,20 +25,16 @@ class MyButton extends StatelessWidget {
       child: Container(
         height: 50,
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Appcolors.primaryColor, Appcolors.secondaryColor],
-              begin: Alignment.bottomCenter,
-              end: Alignment.topRight,
-            ),
+            color: bgcolor ?? Appcolors.primaryColor,
             boxShadow: [
               BoxShadow(
-                color: Colors.grey.shade400.withOpacity(0.6),
+                color: Colors.grey.shade200.withOpacity(0.9),
                 spreadRadius: 1,
                 blurRadius: 12,
                 offset: const Offset(0, 4), // shadow spreads all around
               ),
             ],
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(radius ?? 20),
             border: Border.all(color: Colors.grey.shade500)),
         child: Center(
             child: isloading
